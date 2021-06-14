@@ -25,7 +25,7 @@ check_brew() {
 }
 
 check_sed() {
-    if [[ ! $(brew list --cask gnu-sed) ]]; then
+    if [[ ! $(brew list gnu-sed) ]]; then
         # this install gsed and add a path so that you can use sed command
         "$(brew --prefix)"/bin/brew install gnu-sed
         # shellcheck disable=SC2016
