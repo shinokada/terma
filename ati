@@ -121,22 +121,21 @@ uninstall() {
     ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
     if [[ $ans = "Y" ]]; then
         # uninstall zsh-syntax-highlighting
-        echo "Uninstalling zsh-syntax-highlighting"
+        echo "Uninstalling zsh-syntax-highlighting..."
         "$(brew --prefix)"/bin/brew uninstall zsh-syntax-highlighting
         # uninstall autojump
         echo "Uninstalling autojump..."
         "$(brew --prefix)"/bin/brew uninstall autojump
         echo "Uninstalling font-fira-code..."
-        "$(brew --prefix)"/bin/brew uninstall font-fira-code
+        "$(brew --prefix)"/bin/brew uninstall --cask font-fira-code
         echo "Uninstalling Starship..."
         "$(brew --prefix)"/bin/brew uninstall starship
         echo "Uninstalling Oh My Zsh..."
-        uninstall_oh_my_zsh
-        echo "Uninstalling Homebrew..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+        sh "$HOME"/.oh-my-zsh/tools/unintall.sh
         echo "Uninstalling iTerm2"
         "$(brew --prefix)"/bin/brew uninstall iterm2
-        echo "Please delete the following files for complete uninstallations."
+        echo "Uninstalling Homebrew..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
         # shellcheck disable=SC2016
         cat "$script_dir/.zshrc" >"$HOME"/.zshrc
         echo "Uninstallation completed."
