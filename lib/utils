@@ -37,12 +37,12 @@ check_sed() {
 }
 
 check_iterm() {
-    if brew list --cask iterm2; then
-        echo "Your system has iTerm2 installed."
-    else
+    if ! brew list --cask iterm2 >&/dev/null; then
         echo "Installing iTerm2 ..."
         brew install --cask iterm2
         echo "iTerm2 installation completed."
+    else
+        echo "Your system has iTerm2 installed."
     fi
 }
 
