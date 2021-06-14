@@ -126,19 +126,19 @@ uninstall() {
     echo "Uninstalling Starship..."
     "$(brew --prefix)"/bin/brew uninstall starship
     echo "Uninstalling Oh My Zsh..."
+    uninstall_oh_my_zsh
+    echo "Uninstalling Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-
     echo "Uninstalling iTerm2"
-
+    "$(brew --prefix)"/bin/brew uninstall iterm2
     echo "Please delete the following files for complete uninstallations."
+    echo "Uninstallation completed."
     # shellcheck disable=SC2016
     {
         echo '- eval "$(starship init zsh)" from ~/.zshrc.'
         echo "- autojump brew zsh-syntax-highlighting zsh-autosuggestions from plugins in ~/.zshrc."
         echo 'export PATH=$(brew --prefix)/bin:$PATH from ~/.zshrc.'
     }
-    echo "Uninstallation completed."
-
 }
 
 fn_main() {
