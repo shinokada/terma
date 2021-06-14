@@ -1,0 +1,97 @@
+# shellcheck shell=bash
+
+check_cmd() {
+    if [[ -z "$(command -v "$1")" ]]; then
+        return 1
+    fi
+}
+
+check_brew() {
+    if [[ -z "$(command -v brew)" ]]; then
+        echo "Installing Homewbrew ..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        # append to ~/.zshrc
+        # shellcheck disable=SC2016
+        echo 'export PATH=$(brew --prefix)/bin:$PATH >> $HOME/.zshrc'
+        # source the ~/.zshrc file
+        # shellcheck disable=SC1091
+        source "$HOME/.zshrc"
+        echo "Homebrew installation completed."
+    else
+        echo "You have already Homebrew installed."
+    fi
+
+    return 0
+}
+
+check_iterm() {
+    if [[ $(brew list --cask iterm2) ]]; then
+        echo "You already have iTerm2 installed."
+    else
+        echo "Installing iTerm2 ..."
+        brew install --cask iterm2
+        echo "iTerm2 installation completed."
+    fi
+}
+
+check_zsh() {
+    if [[ -z "$(command -v zsh)" ]]; then
+        echo "Installing zsh ..."
+        brew install zsh
+        echo "Zsh installation completed."
+    else
+        echo "You have already zsh installed."
+    fi
+}
+
+check_omz() {
+    if [[ ! -d $HOME/.oh-my-zsh ]]; then
+        echo "Installing Oh My Zsh ..."
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        echo "Oh My Zsh installation completed. Updating Oh My Zsh..."
+        # add export PATH=$(brew --prefix)/bin:$PATH to $HOME/.zshrc BEFORE plugins
+        # TODO
+        omz update
+        echo "Oh My Zsh updated."
+        chmod 755 "$(brew --prefix)"/share/zsh
+        chmod 755 "$(brew --prefix)"/share/zsh/site-functions
+    else
+        echo "You have already Oh My Zsh installed."
+    fi
+}
+
+check_firacode() {
+    if [[ $(brew list --cask font-fira-code) ]]; then
+        echo "You already have Fira Code installed."
+    else
+        echo "Installing Fira Code font..."
+        brew tap homebrew/cask-fonts && brew install --cask font-fira-code
+        echo "Fira Code font installation completed."
+    fi
+}
+
+add_plugins() {
+    echo adding plugins
+
+    # autojump
+
+    # zsh-syntax-highlighting
+
+    # zsh-autosuggestions
+
+    # replace plugins to plugins=(git brew zsh-syntax-highlighting zsh-autosuggestions)
+
+    # run source $HOME/.zshrc
+}
+
+check_starship() {
+    if [[ -z "$(command -v starship)" ]]; then
+        echo "Installing starship ..."
+        brew install starship
+        echo "Installed starship."
+        # shellcheck disable=SC2016
+        echo 'eval "$(starship init zsh)"' >>~/.zshrc
+    else
+        echo "You have already starship installed."
+    fi
+}
