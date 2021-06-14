@@ -24,6 +24,17 @@ check_brew() {
     return 0
 }
 
+check_sed() {
+    if [[ ! $(brew list --cask gnu-sed) ]]; then
+        # this install gsed and add a path so that you can use sed command
+        "$(brew --prefix)"/bin/brew install gnu-sed
+        # shellcheck disable=SC2016
+        echo 'export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"' >>"$HOME"/.zshrc
+    else
+        return 0
+    fi
+}
+
 check_iterm() {
     if [[ $(brew list --cask iterm2) ]]; then
         echo "You already have iTerm2 installed."
@@ -50,7 +61,8 @@ check_omz() {
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
         echo "Oh My Zsh installation completed. Updating Oh My Zsh..."
         # add export PATH=$(brew --prefix)/bin:$PATH to $HOME/.zshrc BEFORE plugins
-        # TODO
+        # shellcheck disable=SC2016
+        sed -i 'plugins=(git)/i export PATH=$(brew --prefix)/bin:$PATH' "$HOME"/.zshrc
         omz update
         echo "Oh My Zsh updated."
         chmod 755 "$(brew --prefix)"/share/zsh
@@ -71,17 +83,28 @@ check_firacode() {
 }
 
 add_plugins() {
-    echo adding plugins
-
+    echo "Adding plugins"
     # autojump
+    if [[ ! $(brew list autojump) ]]; then
+        echo "Installing autojump..."
+        "$(brew --prefix)"/bin/brew install autojump
+    fi
+    if [[ ! $(brew list zsh-syntax-highlighting) ]]; then
+        echo "Installing zsh-syntax-highlighting..."
+        # zsh-syntax-highlighting
+        "$(brew --prefix)"/bin/brew install zsh-syntax-highlighting
+    fi
 
-    # zsh-syntax-highlighting
-
+    echo "Installing zsh-autosuggestions..."
     # zsh-autosuggestions
-
+    # TODO ~ can be a problem in ~/.oh-my
+    /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
     # replace plugins to plugins=(git brew zsh-syntax-highlighting zsh-autosuggestions)
 
+    sed -i 's/plugins=(git)/plugins=(git autojump brew zsh-syntax-highlighting zsh-autosuggestions brew)/' "$HOME"/.zshrc
     # run source $HOME/.zshrc
+    # shellcheck disable=SC1091
+    source "$HOME/.zshrc"
 }
 
 check_starship() {

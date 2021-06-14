@@ -77,6 +77,7 @@ copy_plist() {
 install() {
     echo "Installation starting ..."
     check_brew
+    check_sed
     check_iterm
     check_zsh
     check_omz
@@ -85,11 +86,42 @@ install() {
     check_firacode
     copy_plist
     add_plugins
-    echo "Installation completed."
+    cat <<'EOF'
+   _                                 _____              _           _ 
+  /_\__ __ _____ ___ ___ _ __  ___  |_   _|__ _ _ _ __ (_)_ _  __ _| |
+ / _ \ V  V / -_|_-</ _ \ '  \/ -_)   | |/ -_) '_| '  \| | ' \/ _` | |
+/_/ \_\_/\_/\___/__/\___/_|_|_\___|   |_|\___|_| |_|_|_|_|_||_\__,_|_|
+
+is now installed!
+
+EOF
 }
 
 uninstall() {
-    echo uninstalling
+    # uninstall zsh-syntax-highlighting
+    echo "Uninstalling zsh-syntax-highlighting"
+    "$(brew --prefix)"/bin/brew uninstall zsh-syntax-highlighting
+    # uninstall autojump
+    echo "Uninstalling autojump..."
+    "$(brew --prefix)"/bin/brew uninstall autojump
+    echo "Uninstalling font-fira-code..."
+    "$(brew --prefix)"/bin/brew uninstall font-fira-code
+    echo "Uninstalling Starship..."
+    "$(brew --prefix)"/bin/brew uninstall starship
+    echo "Uninstalling Oh My Zsh..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+
+    echo "Uninstalling iTerm2"
+
+    echo "Please delete the following files for complete uninstallations."
+    # shellcheck disable=SC2016
+    {
+        echo '- eval "$(starship init zsh)" from ~/.zshrc.'
+        echo "- autojump brew zsh-syntax-highlighting zsh-autosuggestions from plugins in ~/.zshrc."
+        echo 'export PATH=$(brew --prefix)/bin:$PATH from ~/.zshrc.'
+    }
+    echo "Uninstallation completed."
+
 }
 
 fn_main() {
