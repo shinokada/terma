@@ -115,6 +115,8 @@ EOF
 }
 
 uninstall() {
+    # confirm
+
     # uninstall zsh-syntax-highlighting
     echo "Uninstalling zsh-syntax-highlighting"
     "$(brew --prefix)"/bin/brew uninstall zsh-syntax-highlighting
@@ -132,13 +134,9 @@ uninstall() {
     echo "Uninstalling iTerm2"
     "$(brew --prefix)"/bin/brew uninstall iterm2
     echo "Please delete the following files for complete uninstallations."
-    echo "Uninstallation completed."
     # shellcheck disable=SC2016
-    {
-        echo '- eval "$(starship init zsh)" from ~/.zshrc.'
-        echo "- autojump brew zsh-syntax-highlighting zsh-autosuggestions from plugins in ~/.zshrc."
-        echo 'export PATH=$(brew --prefix)/bin:$PATH from ~/.zshrc.'
-    }
+    cat "$script_dir/.zshrc" >"$HOME"/.zshrc
+    echo "Uninstallation completed."
 }
 
 fn_main() {
@@ -155,5 +153,4 @@ fn_main() {
     fi
 }
 
-# check_os
 fn_main "$@"
