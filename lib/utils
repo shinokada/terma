@@ -18,7 +18,7 @@ check_brew() {
         source "$HOME/.zshrc"
         echo "Homebrew installation completed."
     else
-        echo "You have already Homebrew installed."
+        echo "Your system has Homebrew installed."
     fi
 
     return 0
@@ -27,17 +27,18 @@ check_brew() {
 check_sed() {
     if ! brew list gnu-sed >&/dev/null; then
         # this install gsed and add a path so that you can use sed command
+        echo "Installing GNU-sed..."
         "$(brew --prefix)"/bin/brew install gnu-sed
         # shellcheck disable=SC2016
         echo 'export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"' >>"$HOME"/.zshrc
     else
-        return 0
+        echo "Your system has gnu-sed installed."
     fi
 }
 
 check_iterm() {
-    if brew list --cask iterm2 >&/dev/null; then
-        echo "You already have iTerm2 installed."
+    if brew list --cask iterm2; then
+        echo "Your system has iTerm2 installed."
     else
         echo "Installing iTerm2 ..."
         brew install --cask iterm2
@@ -51,7 +52,7 @@ check_zsh() {
         brew install zsh
         echo "Zsh installation completed."
     else
-        echo "You have already zsh installed."
+        echo "Your system has zsh installed."
     fi
 }
 
@@ -68,13 +69,13 @@ check_omz() {
         chmod 755 "$(brew --prefix)"/share/zsh
         chmod 755 "$(brew --prefix)"/share/zsh/site-functions
     else
-        echo "You have already Oh My Zsh installed."
+        echo "Your system has already Oh My Zsh installed."
     fi
 }
 
 check_firacode() {
     if brew list --cask font-fira-code >&/dev/null; then
-        echo "You already have Fira Code installed."
+        echo "Your system has Fira Code installed."
     else
         echo "Installing Fira Code font..."
         brew tap homebrew/cask-fonts && brew install --cask font-fira-code
@@ -114,6 +115,6 @@ check_starship() {
         # shellcheck disable=SC2016
         echo 'eval "$(starship init zsh)"' >>~/.zshrc
     else
-        echo "You have already starship installed."
+        echo "Your system has starship installed."
     fi
 }

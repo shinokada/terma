@@ -37,6 +37,9 @@ Open a terminal (not iTerm).
     # show version
     ati -v
 
+After Oh My Zsh installation, it will exit.
+Please run `ati` again.
+
 ## Features
 
 
