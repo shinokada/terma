@@ -25,7 +25,7 @@ check_brew() {
 }
 
 check_sed() {
-    if [[ ! $(brew list gnu-sed) ]]; then
+    if ! brew list gnu-sed >&/dev/null; then
         # this install gsed and add a path so that you can use sed command
         "$(brew --prefix)"/bin/brew install gnu-sed
         # shellcheck disable=SC2016
@@ -36,7 +36,7 @@ check_sed() {
 }
 
 check_iterm() {
-    if [[ $(brew list --cask iterm2) ]]; then
+    if brew list --cask iterm2 >&/dev/null; then
         echo "You already have iTerm2 installed."
     else
         echo "Installing iTerm2 ..."
@@ -73,7 +73,7 @@ check_omz() {
 }
 
 check_firacode() {
-    if [[ $(brew list --cask font-fira-code) ]]; then
+    if brew list --cask font-fira-code >&/dev/null; then
         echo "You already have Fira Code installed."
     else
         echo "Installing Fira Code font..."
@@ -85,11 +85,11 @@ check_firacode() {
 add_plugins() {
     echo "Adding plugins"
     # autojump
-    if [[ ! $(brew list autojump) ]]; then
+    if ! brew list autojump >&/dev/null; then
         echo "Installing autojump..."
         "$(brew --prefix)"/bin/brew install autojump
     fi
-    if [[ ! $(brew list zsh-syntax-highlighting) ]]; then
+    if ! brew list zsh-syntax-highlighting >&/dev/null; then
         echo "Installing zsh-syntax-highlighting..."
         # zsh-syntax-highlighting
         "$(brew --prefix)"/bin/brew install zsh-syntax-highlighting
@@ -97,7 +97,6 @@ add_plugins() {
 
     echo "Installing zsh-autosuggestions..."
     # zsh-autosuggestions
-    # TODO ~ can be a problem in ~/.oh-my, so I changed to -$HOME
     /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
     # replace plugins to plugins=(git brew zsh-syntax-highlighting zsh-autosuggestions)
 
