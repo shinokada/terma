@@ -25,24 +25,24 @@ check_brew() {
 }
 
 check_sed() {
-    if ! brew list gnu-sed >&/dev/null; then
+    if brew list gnu-sed >&/dev/null; then
+        echo "Your system has gnu-sed installed."
+    else
         # this install gsed and add a path so that you can use sed command
         echo "Installing GNU-sed..."
         "$(brew --prefix)"/bin/brew install gnu-sed
         # shellcheck disable=SC2016
         echo 'export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"' >>"$HOME"/.zshrc
-    else
-        echo "Your system has gnu-sed installed."
     fi
 }
 
 check_iterm() {
-    if ! brew list --cask iterm2 >&/dev/null; then
+    if brew list --cask iterm2 >&/dev/null; then
+        echo "Your system has iTerm2 installed."
+    else
         echo "Installing iTerm2 ..."
         brew install --cask iterm2
         echo "iTerm2 installation completed."
-    else
-        echo "Your system has iTerm2 installed."
     fi
 }
 
@@ -57,7 +57,9 @@ check_zsh() {
 }
 
 check_omz() {
-    if [[ ! -d $HOME/.oh-my-zsh ]]; then
+    if [[ -d $HOME/.oh-my-zsh ]]; then
+        echo "Your system has already Oh My Zsh installed."
+    else
         echo "Installing Oh My Zsh ..."
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
         echo "Oh My Zsh installation completed. Updating Oh My Zsh..."
@@ -68,8 +70,6 @@ check_omz() {
         echo "Oh My Zsh updated."
         chmod 755 "$(brew --prefix)"/share/zsh
         chmod 755 "$(brew --prefix)"/share/zsh/site-functions
-    else
-        echo "Your system has already Oh My Zsh installed."
     fi
 }
 

@@ -64,6 +64,7 @@ fn_script_dir() {
 }
 
 script_dir=$(fn_script_dir)
+echo "$script_dir"
 
 import() {
     local file="${script_dir}/lib/${1}"
@@ -92,7 +93,7 @@ copy_plist() {
 }
 
 install() {
-    echo "Installation starting ..."
+    echo "Installation starting..."
     check_brew
     check_sed
     check_iterm
