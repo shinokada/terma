@@ -97,8 +97,8 @@ add_plugins() {
 
     echo "Installing zsh-autosuggestions..."
     # zsh-autosuggestions
-    # TODO ~ can be a problem in ~/.oh-my
-    /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
+    # TODO ~ can be a problem in ~/.oh-my, so I changed to -$HOME
+    /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
     # replace plugins to plugins=(git brew zsh-syntax-highlighting zsh-autosuggestions)
 
     sed -i 's/plugins=(git)/plugins=(git autojump brew zsh-syntax-highlighting zsh-autosuggestions brew)/' "$HOME"/.zshrc

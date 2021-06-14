@@ -1,4 +1,4 @@
-# ati 
+# Awesome Terminal Installer
 
 ## Overview
 

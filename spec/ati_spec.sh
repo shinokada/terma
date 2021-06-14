@@ -13,14 +13,6 @@ Describe 'Test utils'
             The status should eq 1
         End
     End
-
-    # check_brew
-    Describe 'Test for check_brew'
-        It 'outputs the status of 0'
-            When run check_brew
-            The status should eq 0
-        End
-    End
 End
 # check_zsh
 # check_omz
