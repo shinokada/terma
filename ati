@@ -5,7 +5,7 @@
 # Awesome Terminal Installer
 #########
 
-version="0.0.3"
+version="0.1.0"
 script_name=$(basename "$0")
 
 myrealpath() {
@@ -127,8 +127,10 @@ uninstall() {
         # uninstall autojump
         echo "Uninstalling autojump..."
         "$(brew --prefix)"/bin/brew uninstall autojump
+        echo "Completed uninstalling autojump."
         echo "Uninstalling font-fira-code..."
         "$(brew --prefix)"/bin/brew uninstall --cask font-fira-code
+        echo "Completed uninstalling font-fira-code."
         echo "Uninstalling Starship..."
         "$(brew --prefix)"/bin/brew uninstall starship
         echo "Uninstalling Oh My Zsh..."
@@ -137,8 +139,11 @@ uninstall() {
         "$(brew --prefix)"/bin/brew uninstall iterm2
         echo "Uninstalling Homebrew..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+        echo "Removing ~/.oh-my-zsh"
+        rm -rf "$HOME"/.oh-my-zsh
         # shellcheck disable=SC2016
         cat "$script_dir/.zshrc" >"$HOME"/.zshrc
+        echo "We replaced .zshrc with the original contents."
         echo "Uninstallation completed."
     else
         exit

@@ -32,6 +32,7 @@ check_sed() {
         "$(brew --prefix)"/bin/brew install gnu-sed
         # shellcheck disable=SC2016
         echo 'export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"' >>"$HOME"/.zshrc
+        echo "PATH is added to .zshrc"
     fi
 }
 
@@ -88,6 +89,9 @@ add_plugins() {
     if ! brew list autojump >&/dev/null; then
         echo "Installing autojump..."
         "$(brew --prefix)"/bin/brew install autojump
+        # shellcheck disable=SC2016
+        echo '[ -f $(brew --prefix)/etc/profile.d/autojump.sh ] && . $(brew --prefix)/etc/profile.d/autojump.sh' >>"$HOME"/.zshrc
+        echo "PATH is added to .zshrc."
     fi
     if ! brew list zsh-syntax-highlighting >&/dev/null; then
         echo "Installing zsh-syntax-highlighting..."
@@ -98,7 +102,7 @@ add_plugins() {
     # zsh-autosuggestions
     /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
     # replace plugins to plugins=(git brew zsh-syntax-highlighting zsh-autosuggestions)
-    sed -i 's/plugins=(git)/plugins=(git autojump brew zsh-syntax-highlighting zsh-autosuggestions brew)/' "$HOME"/.zshrc
+    sed -i 's/plugins=\(git\)/plugins=\(git autojump brew zsh-syntax-highlighting zsh-autosuggestions brew\)/' "$HOME"/.zshrc
     # run source $HOME/.zshrc
     # shellcheck disable=SC1091
     source "$HOME/.zshrc"
