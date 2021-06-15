@@ -5,7 +5,7 @@
 # Awesome Terminal Installer
 #########
 
-version="0.1.3"
+version="0.2.0"
 script_name=$(basename "$0")
 
 myrealpath() {
@@ -95,10 +95,12 @@ copy_plist() {
 install() {
     echo "Installation starting..."
     check_brew
-    check_sed
+    # check_sed
     check_iterm
     check_zsh
     check_omz
+    update_omz
+    update_zshrc
     check_starship
     # Snazzy color preset is in the com.googlecode.iterms2.plist
     check_firacode
@@ -156,7 +158,7 @@ uninstall() {
         bannerColor "Completed removing ~/.oh-my-zsh directory." "green" "*"
 
         # shellcheck disable=SC2016
-        cat "$script_dir/.zshrc" >"$HOME"/.zshrc
+        cat "$script_dir/zshrc_original" >"$HOME"/.zshrc
         bannerColor "We replaced .zshrc with the original contents." "green" "*"
 
         bannerColor "Uninstallation completed." "green" "*"
