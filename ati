@@ -64,7 +64,7 @@ fn_script_dir() {
 }
 
 script_dir=$(fn_script_dir)
-echo "$script_dir"
+# echo "$script_dir"
 
 import() {
     local file="${script_dir}/lib/${1}"
@@ -72,7 +72,7 @@ import() {
         # shellcheck disable=SC1090
         source "${file}"
     else
-        echo "Error: Cannot find library at: ${file}"
+        bannerColor "Error: Cannot find library at: ${file}" "red" "*"
         exit 1
     fi
 }
@@ -89,7 +89,7 @@ copy_plist() {
         mkdir -p "$preferences"
     fi
     cp "$script_dir/$plist" "$preferences"
-    echo "iTerm2 Preferences added."
+    bannerColor "iTerm2 Preferences added." "green" "*"
 }
 
 install() {
@@ -122,29 +122,44 @@ uninstall() {
     ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
     if [[ $ans = "Y" ]]; then
         # uninstall zsh-syntax-highlighting
-        echo "Uninstalling zsh-syntax-highlighting..."
+        bannerColor "Uninstalling zsh-syntax-highlighting..." "yellow" "*"
         "$(brew --prefix)"/bin/brew uninstall zsh-syntax-highlighting
+        bannerColor "Completed uninstalling zsh-syntax-highlighting..." "green" "*"
+
         # uninstall autojump
-        echo "Uninstalling autojump..."
+        bannerColor "Uninstalling autojump..." "yellow" "*"
         "$(brew --prefix)"/bin/brew uninstall autojump
-        echo "Completed uninstalling autojump."
-        echo "Uninstalling font-fira-code..."
+        bannerColor "Completed uninstalling autojump." "green" "*"
+
+        bannerColor "Uninstalling font-fira-code..." "yellow" "*"
         "$(brew --prefix)"/bin/brew uninstall --cask font-fira-code
-        echo "Completed uninstalling font-fira-code."
-        echo "Uninstalling Starship..."
+        bannerColor "Completed uninstalling font-fira-code." "green" "*"
+
+        bannerColor "Uninstalling Starship..." "yellow" "*"
         "$(brew --prefix)"/bin/brew uninstall starship
-        echo "Uninstalling Oh My Zsh..."
+        bannerColor "Completed uninstalling Starship." "green" "*"
+
+        bannerColor "Uninstalling Oh My Zsh..." "yellow" "*"
         sh "$HOME"/.oh-my-zsh/tools/unintall.sh
-        echo "Uninstalling iTerm2"
+        bannerColor "Completed uninstalling ." "green" "*"
+
+        bannerColor "Uninstalling iTerm2" "yellow" "*"
         "$(brew --prefix)"/bin/brew uninstall iterm2
-        echo "Uninstalling Homebrew..."
+        bannerColor "Completed uninstalling iTerm2." "green" "*"
+
+        bannerColor "Uninstalling Homebrew..." "yellow" "*"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-        echo "Removing ~/.oh-my-zsh"
+        bannerColor "Completed uninstalling Homebrew." "green" "*"
+
+        bannerColor "Removing ~/.oh-my-zsh" "yellow" "*"
         rm -rf "$HOME"/.oh-my-zsh
+        bannerColor "Completed removing ~/.oh-my-zsh directory." "green" "*"
+
         # shellcheck disable=SC2016
         cat "$script_dir/.zshrc" >"$HOME"/.zshrc
-        echo "We replaced .zshrc with the original contents."
-        echo "Uninstallation completed."
+        bannerColor "We replaced .zshrc with the original contents." "green" "*"
+
+        bannerColor "Uninstallation completed." "green" "*"
     else
         exit
     fi
