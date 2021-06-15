@@ -7,7 +7,9 @@ check_cmd() {
 }
 
 check_brew() {
-    if [[ -z "$(command -v brew)" ]]; then
+    if command -v brew >&/dev/null; then
+        echo "Your system has Homebrew installed."
+    else
         echo "Installing Homewbrew ..."
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         # append to ~/.zshrc
@@ -17,10 +19,7 @@ check_brew() {
         # shellcheck disable=SC1091
         source "$HOME/.zshrc"
         echo "Homebrew installation completed."
-    else
-        echo "Your system has Homebrew installed."
     fi
-
     return 0
 }
 
@@ -47,12 +46,12 @@ check_iterm() {
 }
 
 check_zsh() {
-    if [[ -z "$(command -v zsh)" ]]; then
+    if command -v zsh; then
+        echo "Your system has zsh installed."
+    else
         echo "Installing zsh ..."
         brew install zsh
         echo "Zsh installation completed."
-    else
-        echo "Your system has zsh installed."
     fi
 }
 
@@ -95,12 +94,10 @@ add_plugins() {
         # zsh-syntax-highlighting
         "$(brew --prefix)"/bin/brew install zsh-syntax-highlighting
     fi
-
     echo "Installing zsh-autosuggestions..."
     # zsh-autosuggestions
     /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
     # replace plugins to plugins=(git brew zsh-syntax-highlighting zsh-autosuggestions)
-
     sed -i 's/plugins=(git)/plugins=(git autojump brew zsh-syntax-highlighting zsh-autosuggestions brew)/' "$HOME"/.zshrc
     # run source $HOME/.zshrc
     # shellcheck disable=SC1091
@@ -108,13 +105,13 @@ add_plugins() {
 }
 
 check_starship() {
-    if [[ -z "$(command -v starship)" ]]; then
+    if command -v starship; then
+        echo "Your system has starship installed."
+    else
         echo "Installing starship ..."
         brew install starship
         echo "Installed starship."
         # shellcheck disable=SC2016
         echo 'eval "$(starship init zsh)"' >>~/.zshrc
-    else
-        echo "Your system has starship installed."
     fi
 }
