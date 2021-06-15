@@ -27,6 +27,8 @@ This script installs followings, if it is not installed on you system:
 
 [Awesome package installer](https://github.com/shinokada/awesome)
 
+When it is installaing
+
 ## Usage
 
 Run all the command from a terminal (not iTerm).

@@ -10,7 +10,7 @@ check_brew() {
     if command -v brew >&/dev/null; then
         bannerColor "Your system has Homebrew installed." "green" "*"
     else
-        echo "Installing Homewbrew ..."
+        bannerColor "Installing Homewbrew ..." "green" "*"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         # append to ~/.zshrc
         # shellcheck disable=SC2016
@@ -32,7 +32,7 @@ check_sed() {
         "$(brew --prefix)"/bin/brew install gnu-sed
         # shellcheck disable=SC2016
         echo 'export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"' >>"$HOME"/.zshrc
-        bannerColor "PATH is added to .zshrc" "green" "*"
+        bannerColor "GNU-sed installation completed. The PATH is added to .zshrc" "green" "*"
     fi
 }
 
@@ -70,6 +70,7 @@ check_omz() {
         bannerColor "Oh My Zsh updated." "green" "*"
         chmod 755 "$(brew --prefix)"/share/zsh
         chmod 755 "$(brew --prefix)"/share/zsh/site-functions
+        bannerColor "If the installation is ended after this, please run ati again." "yellow" "*"
     fi
 }
 
@@ -97,25 +98,28 @@ add_plugins() {
         bannerColor "Installing zsh-syntax-highlighting..." "green" "*"
         # zsh-syntax-highlighting
         "$(brew --prefix)"/bin/brew install zsh-syntax-highlighting
+        bannerColor "zsh-syntax-highlighting installation completed." "green" "*"
     fi
     bannerColor "Installing zsh-autosuggestions..." "green" "*"
     # zsh-autosuggestions
     /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
     # replace plugins to plugins=(git brew zsh-syntax-highlighting zsh-autosuggestions)
-    sed -i 's/plugins=\(git\)/plugins=\(git autojump brew zsh-syntax-highlighting zsh-autosuggestions brew\)/' "$HOME"/.zshrc
+    sed -i "s/plugins=(git)/plugins=(git autojump brew zsh-syntax-highlighting zsh-autosuggestions brew)/" "$HOME"/.zshrc
     # run source $HOME/.zshrc
     # shellcheck disable=SC1091
     source "$HOME/.zshrc"
+    bannerColor "zsh-autosuggestions installation completed." "green" "*"
 }
 
 check_starship() {
     if command -v starship; then
-        bannerColor "Your system has starship installed." "green" "*"
+        bannerColor "Your system has Starship installed." "green" "*"
     else
-        bannerColor "Installing starship ..." "green" "*"
+        bannerColor "Installing Starship ..." "green" "*"
         brew install starship
-        bannerColor "Installed starship." "green" "*"
+        bannerColor "Starship installation completed." "green" "*"
         # shellcheck disable=SC2016
         echo 'eval "$(starship init zsh)"' >>~/.zshrc
+        bannerColor "Starship installation completed." "green" "*"
     fi
 }
