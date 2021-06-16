@@ -36,23 +36,32 @@ This script installs followings, if it is not installed on you system:
 
 Run all the command from a terminal (not iTerm).
 
-    # Install
-    ati
+```sh
+# Install
+ati
 
-    # show help
-    ati -h
+# show help
+ati -h
 
-    # show version
-    ati -v
+# show version
+ati -v
+```
 
 After Oh My Zsh installation, it will exit.
 Please run `ati` again.
 
-
-
 This add `com.googlecode.iterm2.plist` to `$HOME/Library/Application Support/iTerm2/DynamicProfiles`
 
 The original `com.googlecode.iterm2.plist` is in the `$HOME/Library/Preferences/` directory.
+
+### How to uninstall Awesome Terminal
+
+```sh
+ati uninstall
+```
+
+Homebrew uninstallation will confirm if you want to uninstalland your password.
+
 
 ## Author
 

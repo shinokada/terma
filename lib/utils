@@ -79,10 +79,6 @@ update_zshrc_new() {
     bannerColor "We replaced .zshrc with the original contents." "green" "*"
 }
 
-replace_zshrc_original() {
-    echo hi
-}
-
 check_starship() {
     if command -v starship; then
         bannerColor "Your system has Starship installed." "green" "*"
