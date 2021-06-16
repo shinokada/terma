@@ -28,7 +28,9 @@ This script installs followings, if it is not installed on you system:
 
 [Awesome package installer](https://github.com/shinokada/awesome)
 
-When it is installaing
+1. at the beginning it requires your passwor and press return.
+2. After Oh-my-zsh, run `ati` again.
+3. Run `omz update` after installation.
 
 ## Usage
 

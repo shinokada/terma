@@ -10,7 +10,7 @@ check_brew() {
     if command -v brew >&/dev/null; then
         bannerColor "Your system has Homebrew installed." "green" "*"
     else
-        bannerColor "Installing Homewbrew ..." "green" "*"
+        bannerColor "Installing Homewbrew ..." "magenta" "*"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         # append to ~/.zshrc
         # shellcheck disable=SC2016
@@ -23,24 +23,11 @@ check_brew() {
     return 0
 }
 
-# check_sed() {
-#     if brew list gnu-sed >&/dev/null; then
-#         bannerColor "Your system has gnu-sed installed." "green" "*"
-#     else
-#         # this install gsed and add a path so that you can use sed command
-#         bannerColor "Installing GNU-sed..." "green" "*"
-#         "$(brew --prefix)"/bin/brew install gnu-sed
-#         # shellcheck disable=SC2016
-#         echo 'export PATH="$(brew --prefix)/opt/gnu-sed/libexec/gnubin:$PATH"' >>"$HOME"/.zshrc
-#         bannerColor "GNU-sed installation completed. The PATH is added to .zshrc" "green" "*"
-#     fi
-# }
-
 check_iterm() {
     if brew list --cask iterm2 >&/dev/null; then
         bannerColor "Your system has iTerm2 installed." "green" "*"
     else
-        bannerColor "Installing iTerm2 ..." "green" "*"
+        bannerColor "Installing iTerm2 ..." "magenta" "*"
         if brew install --cask iterm2; then
             bannerColor "iTerm2 installation completed." "green" "*"
         else
@@ -53,7 +40,7 @@ check_zsh() {
     if command -v zsh >&/dev/null; then
         bannerColor "Your system has zsh installed." "green" "*"
     else
-        bannerColor "Installing zsh ..." "green" "*"
+        bannerColor "Installing zsh ..." "magenta" "*"
         if brew install zsh; then
             bannerColor "Zsh installation completed." "green" "*"
         else
@@ -67,7 +54,7 @@ check_omz() {
         bannerColor "Your system has already Oh My Zsh installed." "green" "*"
     else
         bannerColor "Installation will end after this, please run ati again." "red" "*"
-        bannerColor "Installing Oh My Zsh ..." "green" "*"
+        bannerColor "Installing Oh My Zsh ..." "magenta" "*"
         # add export PATH=$(brew --prefix)/bin:$PATH to $HOME/.zshrc BEFORE plugins
         # shellcheck disable=SC2016
         # sed -i 'plugins=(git)/i export PATH=$(brew --prefix)/bin:$PATH' "$HOME"/.zshrc
@@ -78,24 +65,29 @@ check_omz() {
 update_omz() {
     chmod 755 "$(brew --prefix)"/share/zsh
     chmod 755 "$(brew --prefix)"/share/zsh/site-functions
-    if omz update; then
+    if omz update >&/dev/null; then
         bannerColor "Oh My Zsh updated." "green" "*"
     else
         bannerColor "Please run omz update." "red" "*"
     fi
 }
 
-update_zshrc() {
+update_zshrc_new() {
+    bannerColor "Updating ~/.zshrc..." "magenta" "*"
     # After
-    cat "$script_dir/zshrc_original" >"$HOME"/.zshrc
+    cat "$script_dir/zshrc" >"$HOME"/.zshrc
     bannerColor "We replaced .zshrc with the original contents." "green" "*"
+}
+
+replace_zshrc_original() {
+    echo hi
 }
 
 check_starship() {
     if command -v starship; then
         bannerColor "Your system has Starship installed." "green" "*"
     else
-        bannerColor "Installing Starship ..." "green" "*"
+        bannerColor "Installing Starship ..." "magenta" "*"
         if brew install starship; then
             # shellcheck disable=SC2016
             # echo 'eval "$(starship init zsh)"' >>~/.zshrc
@@ -110,7 +102,7 @@ check_firacode() {
     if brew list --cask font-fira-code >&/dev/null; then
         bannerColor "Your system has Fira Code installed." "green" "*"
     else
-        bannerColor "Installing Fira Code font..." "green" "*"
+        bannerColor "Installing Fira Code font..." "magenta" "*"
         brew tap homebrew/cask-fonts && brew install --cask font-fira-code
         bannerColor "Fira Code font installation completed." "green" "*"
     fi
@@ -120,19 +112,19 @@ add_plugins() {
     bannerColor "Adding plugins" "green" "*"
     # autojump
     if ! brew list autojump >&/dev/null; then
-        bannerColor "Installing autojump..." "green" "*"
+        bannerColor "Installing autojump..." "magenta" "*"
         "$(brew --prefix)"/bin/brew install autojump
         # shellcheck disable=SC2016
         # echo '[ -f $(brew --prefix)/etc/profile.d/autojump.sh ] && . $(brew --prefix)/etc/profile.d/autojump.sh' >>"$HOME"/.zshrc
         bannerColor "Autojump installation completed." "green" "*"
     fi
     if ! brew list zsh-syntax-highlighting >&/dev/null; then
-        bannerColor "Installing zsh-syntax-highlighting..." "green" "*"
+        bannerColor "Installing zsh-syntax-highlighting..." "magenta" "*"
         # zsh-syntax-highlighting
         "$(brew --prefix)"/bin/brew install zsh-syntax-highlighting
         bannerColor "zsh-syntax-highlighting installation completed." "green" "*"
     fi
-    bannerColor "Installing zsh-autosuggestions..." "green" "*"
+    bannerColor "Installing zsh-autosuggestions..." "magenta" "*"
     # zsh-autosuggestions
     /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
     # replace plugins to plugins=(git brew zsh-syntax-highlighting zsh-autosuggestions)
