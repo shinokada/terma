@@ -5,7 +5,7 @@
 # Awesome Terminal Installer
 #########
 
-version="0.2.0"
+version="0.2.1"
 script_name=$(basename "$0")
 
 myrealpath() {
@@ -99,7 +99,6 @@ install() {
     check_iterm
     check_zsh
     check_omz
-    update_omz
     update_zshrc
     check_starship
     # Snazzy color preset is in the com.googlecode.iterms2.plist
@@ -115,6 +114,7 @@ install() {
 is now installed!
 
 EOF
+    update_omz
 }
 
 uninstall() {

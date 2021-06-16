@@ -41,18 +41,24 @@ check_iterm() {
         bannerColor "Your system has iTerm2 installed." "green" "*"
     else
         bannerColor "Installing iTerm2 ..." "green" "*"
-        brew install --cask iterm2
-        bannerColor "iTerm2 installation completed." "green" "*"
+        if brew install --cask iterm2; then
+            bannerColor "iTerm2 installation completed." "green" "*"
+        else
+            bannerColor "iTerm2 installation unsuccessfule." "red" "*"
+        fi
     fi
 }
 
 check_zsh() {
-    if command -v zsh; then
+    if command -v zsh >&/dev/null; then
         bannerColor "Your system has zsh installed." "green" "*"
     else
         bannerColor "Installing zsh ..." "green" "*"
-        brew install zsh
-        bannerColor "Zsh installation completed." "green" "*"
+        if brew install zsh; then
+            bannerColor "Zsh installation completed." "green" "*"
+        else
+            bannerColor "Zsh installation unsuccessful." "red" "*"
+        fi
     fi
 }
 
@@ -70,10 +76,13 @@ check_omz() {
 }
 
 update_omz() {
-    omz update
-    bannerColor "Oh My Zsh updated." "green" "*"
     chmod 755 "$(brew --prefix)"/share/zsh
     chmod 755 "$(brew --prefix)"/share/zsh/site-functions
+    if omz update; then
+        bannerColor "Oh My Zsh updated." "green" "*"
+    else
+        bannerColor "Please run omz update." "red" "*"
+    fi
 }
 
 update_zshrc() {
@@ -87,10 +96,13 @@ check_starship() {
         bannerColor "Your system has Starship installed." "green" "*"
     else
         bannerColor "Installing Starship ..." "green" "*"
-        brew install starship
-        # shellcheck disable=SC2016
-        # echo 'eval "$(starship init zsh)"' >>~/.zshrc
-        bannerColor "Starship installation completed." "green" "*"
+        if brew install starship; then
+            # shellcheck disable=SC2016
+            # echo 'eval "$(starship init zsh)"' >>~/.zshrc
+            bannerColor "Starship installation completed." "green" "*"
+        else
+            bannerColor "Starship installation unsuccessful." "red" "*"
+        fi
     fi
 }
 
