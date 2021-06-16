@@ -88,7 +88,6 @@ check_starship() {
     else
         bannerColor "Installing Starship ..." "green" "*"
         brew install starship
-        bannerColor "Starship installation completed." "green" "*"
         # shellcheck disable=SC2016
         # echo 'eval "$(starship init zsh)"' >>~/.zshrc
         bannerColor "Starship installation completed." "green" "*"
