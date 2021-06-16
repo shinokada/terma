@@ -53,12 +53,12 @@ check_omz() {
     if [[ -d $HOME/.oh-my-zsh ]]; then
         bannerColor "Your system has already Oh My Zsh installed." "green" "*"
     else
-        bannerColor "Installation will end after this, please run ati again." "red" "*"
         bannerColor "Installing Oh My Zsh ..." "magenta" "*"
+        bannerColor "Installation will end after this, please run ati again." "red" "*"
         # add export PATH=$(brew --prefix)/bin:$PATH to $HOME/.zshrc BEFORE plugins
         # shellcheck disable=SC2016
         # sed -i 'plugins=(git)/i export PATH=$(brew --prefix)/bin:$PATH' "$HOME"/.zshrc
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >&/dev/null
     fi
 }
 
