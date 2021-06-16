@@ -175,7 +175,7 @@ fn_main() {
         exit
     else
         case $1 in
-        -u | --uninstall) uninstall ;;
+        uninstall) uninstall ;;
         -h | --help) usage ;;
         -v | --version) echo "${version}" ;;
         *) usage ;;
