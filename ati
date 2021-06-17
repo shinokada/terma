@@ -161,7 +161,7 @@ uninstall() {
         bannerColor "Completed removing ~/.oh-my-zsh directory." "green" "*"
 
         # shellcheck disable=SC2016
-        cat "$script_dir/zshrc_original" >"$HOME"/.zshrc_original
+        cat "$script_dir/zshrc_original" >"$HOME"/.zshrc
         bannerColor "We replaced .zshrc with the original contents." "green" "*"
 
         bannerColor "Uninstallation completed." "green" "*"
