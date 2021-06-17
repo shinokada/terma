@@ -102,7 +102,7 @@ add_plugins() {
     fi
 
     bannerColor "Installing zsh-syntax-highlighting..." "magenta" "*"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
     bannerColor "zsh-syntax-highlighting installation completed." "green" "*"
 
     bannerColor "Installing zsh-autosuggestions..." "magenta" "*"

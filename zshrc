@@ -9,7 +9,7 @@ ZSH_THEME="robbyrussell"
 # Homebrew
 export PATH=$(brew --prefix)/bin:$PATH
 
-plugins=(git autojump brew zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git autojump brew zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
