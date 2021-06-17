@@ -17,5 +17,3 @@ source $ZSH/oh-my-zsh.sh
 eval "$(starship init zsh)"
 # autojump
 [ -f $(brew --prefix)/etc/profile.d/autojump.sh ] && . $(brew --prefix)/etc/profile.d/autojump.sh
-
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
