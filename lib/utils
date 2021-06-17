@@ -100,12 +100,11 @@ add_plugins() {
         # echo '[ -f $(brew --prefix)/etc/profile.d/autojump.sh ] && . $(brew --prefix)/etc/profile.d/autojump.sh' >>"$HOME"/.zshrc
         bannerColor "Autojump installation completed." "green" "*"
     fi
-    if ! brew list zsh-syntax-highlighting >&/dev/null; then
-        bannerColor "Installing zsh-syntax-highlighting..." "magenta" "*"
-        # zsh-syntax-highlighting
-        "$(brew --prefix)"/bin/brew install zsh-syntax-highlighting
-        bannerColor "zsh-syntax-highlighting installation completed." "green" "*"
-    fi
+
+    bannerColor "Installing zsh-syntax-highlighting..." "magenta" "*"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+    bannerColor "zsh-syntax-highlighting installation completed." "green" "*"
+
     bannerColor "Installing zsh-autosuggestions..." "magenta" "*"
     # zsh-autosuggestions
     /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
