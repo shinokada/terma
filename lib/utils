@@ -1,4 +1,4 @@
-# shellcheck shell=bash
+#!/usr/bin/env bash
 
 check_cmd() {
     if [[ -z "$(command -v "$1")" ]]; then
@@ -55,26 +55,12 @@ check_omz() {
     else
         bannerColor "Installing Oh My Zsh ..." "magenta" "*"
         bannerColor "Installation will end after this, please run ati again." "red" "*"
-        # add export PATH=$(brew --prefix)/bin:$PATH to $HOME/.zshrc BEFORE plugins
-        # shellcheck disable=SC2016
-        # sed -i 'plugins=(git)/i export PATH=$(brew --prefix)/bin:$PATH' "$HOME"/.zshrc
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" >&/dev/null
-    fi
-}
-
-update_omz() {
-    chmod 755 "$(brew --prefix)"/share/zsh
-    chmod 755 "$(brew --prefix)"/share/zsh/site-functions
-    if omz update >&/dev/null; then
-        bannerColor "Oh My Zsh updated." "green" "*"
-    else
-        bannerColor "Please run omz update." "red" "*"
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     fi
 }
 
 update_zshrc_new() {
     bannerColor "Updating ~/.zshrc..." "magenta" "*"
-    # After
     cat "$script_dir/zshrc" >"$HOME"/.zshrc
     bannerColor "We replaced .zshrc with the original contents." "green" "*"
 }
@@ -129,4 +115,15 @@ add_plugins() {
     # shellcheck disable=SC1091
     source "$HOME/.zshrc"
     bannerColor "zsh-autosuggestions installation completed." "green" "*"
+}
+
+# This run at the end of the script
+update_omz() {
+    chmod 755 "$(brew --prefix)"/share/zsh
+    chmod 755 "$(brew --prefix)"/share/zsh/site-functions
+    if omz update >&/dev/null; then
+        bannerColor "Oh My Zsh updated." "green" "*"
+    else
+        bannerColor "Please run omz update." "red" "*"
+    fi
 }

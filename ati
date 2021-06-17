@@ -32,14 +32,15 @@ Examples:
     # Install
     ati
 
+    # Uninstall
+    ati uninstall
+
     # print this help
     ati -h
 
     # print version
     ati -v
 
-    # Uninstall
-    ati -u
 EOF
     exit
 }

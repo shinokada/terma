@@ -25,8 +25,11 @@ This script installs followings, if it is not installed on you system:
 
 ## Installation
 
-
 [Awesome package installer](https://github.com/shinokada/awesome)
+
+```sh
+ati
+```
 
 1. at the beginning it requires your passwor and press return.
 2. After Oh-my-zsh, run `ati` again.
