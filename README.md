@@ -28,11 +28,11 @@ This script installs followings, if it is not installed on you system:
 [Awesome package installer](https://github.com/shinokada/awesome)
 
 ```sh
-ati
+terma
 ```
 
 1. at the beginning it requires your passwor and press return.
-2. After Oh-my-zsh, run `ati` again.
+2. After Oh-my-zsh, run `terma` again.
 3. Run `omz update` after installation.
 
 ## Usage
@@ -41,17 +41,17 @@ Run all the command from a terminal (not iTerm).
 
 ```sh
 # Install
-ati
+terma
 
 # show help
-ati -h
+terma -h
 
 # show version
-ati -v
+terma -v
 ```
 
 After Oh My Zsh installation, it will exit.
-Please run `ati` again.
+Please run `terma` again.
 
 This add `com.googlecode.iterm2.plist` to `$HOME/Library/Application Support/iTerm2/DynamicProfiles`
 
@@ -60,7 +60,7 @@ The original `com.googlecode.iterm2.plist` is in the `$HOME/Library/Preferences/
 ### How to uninstall Awesome Terminal
 
 ```sh
-ati uninstall
+terma uninstall
 ```
 
 Homebrew uninstallation will confirm if you want to uninstalland your password.

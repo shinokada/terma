@@ -54,7 +54,7 @@ check_omz() {
         bannerColor "Your system has already Oh My Zsh installed." "green" "*"
     else
         bannerColor "Installing Oh My Zsh ..." "magenta" "*"
-        bannerColor "Installation will end after this, please run ati again." "red" "*"
+        bannerColor "Installation will end after this, please run terma again." "red" "*"
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     fi
 }
