@@ -53,7 +53,7 @@ terma -v
 After Oh My Zsh installation, it will exit.
 Please run `terma` again.
 
-This add `com.googlecode.iterm2.plist` to `$HOME/Library/Application Support/iTerm2/DynamicProfiles`
+This add `com.googlecode.iterm2.plist` to `$HOME/Library/Preferences/`
 
 The original `com.googlecode.iterm2.plist` is in the `$HOME/Library/Preferences/` directory.
 
