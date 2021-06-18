@@ -126,11 +126,6 @@ uninstall() {
 
     ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
     if [[ $ans = "Y" ]]; then
-        # uninstall zsh-syntax-highlighting
-        bannerColor "Uninstalling zsh-syntax-highlighting..." "yellow" "*"
-        "$(brew --prefix)"/bin/brew uninstall zsh-syntax-highlighting
-        bannerColor "Completed uninstalling zsh-syntax-highlighting." "green" "*"
-
         # uninstall autojump
         bannerColor "Uninstalling autojump..." "yellow" "*"
         "$(brew --prefix)"/bin/brew uninstall autojump
