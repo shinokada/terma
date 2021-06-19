@@ -27,7 +27,7 @@ check_brew() {
 
         # source the ~/.zshrc file
         # shellcheck disable=SC1091
-        source "$HOME/.zshrc"
+        /bin/zsh source "$HOME/.zshrc"
         bannerColor "Homebrew installation completed." "green" "*"
     fi
     return 0
@@ -70,10 +70,11 @@ check_omz() {
 }
 
 update_zshrc_new() {
+    /bin/zsh omz update
     bannerColor "Updating ~/.zshrc..." "magenta" "*"
     cat "$script_dir/zshrc1" >"$HOME/.zshrc"
     echo "Sourcing zshrc..."
-    source "$HOME/.zshrc" >&/dev/null
+    /bin/zsh source "$HOME/.zshrc"
     bannerColor "We replaced the .zshrc file." "green" "*"
 }
 
@@ -91,7 +92,7 @@ check_starship() {
         fi
     fi
     cat "$script_dir/zshrc1" >"$HOME/.zshrc"
-    source "$HOME/.zshrc" >&/dev/null
+    /bin/zsh source "$HOME/.zshrc"
 }
 
 check_firacode() {
@@ -127,7 +128,7 @@ add_plugins() {
     # run source $HOME/.zshrc
     cat "$script_dir/zshrc" >"$HOME/.zshrc"
     # shellcheck disable=SC1091
-    source "$HOME/.zshrc" >&/dev/null
+    /bin/zsh source "$HOME/.zshrc"
     bannerColor "zsh-autosuggestions installation completed." "green" "*"
 }
 
