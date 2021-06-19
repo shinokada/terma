@@ -70,7 +70,6 @@ check_omz() {
 }
 
 update_zshrc_new() {
-    omz update
     bannerColor "Updating ~/.zshrc..." "magenta" "*"
     cat "$script_dir/zshrc1" >"$HOME/.zshrc"
     echo "Sourcing zshrc..."

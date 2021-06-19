@@ -150,7 +150,7 @@ uninstall() {
         bannerColor "Completed uninstalling Starship." "green" "*"
 
         bannerColor "Uninstalling Oh My Zsh..." "yellow" "*"
-        sh "$HOME/.oh-my-zsh/tools/unintall.sh"
+        sh "$HOME/.oh-my-zsh/tools/unintall.sh" >&/dev/null
         bannerColor "Completed uninstalling Oh-My-Zsh." "green" "*"
 
         bannerColor "Uninstalling iTerm2" "yellow" "*"
@@ -159,6 +159,8 @@ uninstall() {
 
         bannerColor "Uninstalling Homebrew..." "yellow" "*"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+        bannerColor "Removing /opt/homebrew dir..."
+        rm -rf $(brew --prefix)
         bannerColor "Completed uninstalling Homebrew." "green" "*"
 
         bannerColor "Removing ~/.oh-my-zsh" "yellow" "*"
