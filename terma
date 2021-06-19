@@ -5,7 +5,7 @@
 # Awesome Terminal Installer
 #########
 
-version="0.3.0"
+version="0.3.1"
 script_name=$(basename "$0")
 
 myrealpath() {
@@ -171,7 +171,7 @@ uninstall() {
         # shellcheck disable=SC2016
         cat "$script_dir/zshrc_original" >"$HOME"/.zshrc
         bannerColor "We replaced .zshrc with the original contents." "green" "*"
-        /bin/zsh $(source $HOME/.zshrc)
+        /bin/zsh "$(source $HOME/.zshrc)"
 
         if check_arm64; then
             echo "Removing ~/.zprofile"
