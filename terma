@@ -5,7 +5,7 @@
 # Awesome Terminal Installer
 #########
 
-version="0.3.1"
+version="0.3.2"
 script_name=$(basename "$0")
 
 myrealpath() {
