@@ -160,7 +160,7 @@ uninstall() {
 
         bannerColor "Uninstalling Homebrew..." "yellow" "*"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-        bannerColor "Removing /opt/homebrew dir..."
+        bannerColor "Removing /opt/homebrew dir..." "yellow" "*"
         rm -rf $(brew --prefix)
         bannerColor "Completed uninstalling Homebrew." "green" "*"
 
