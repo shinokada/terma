@@ -21,7 +21,7 @@ check_brew() {
         bannerColor "Installing Homewbrew ..." "magenta" "*"
         # append to ~/.zshrc
         # shellcheck disable=SC2016
-        echo 'export PATH=$(brew --prefix)/bin:$PATH >> $HOME/.zshrc'
+        echo 'export PATH=$(brew --prefix)/bin:$PATH >> $HOME/.zshrc' >&/dev/null
 
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -74,7 +74,7 @@ check_omz() {
 update_zshrc_new() {
     bannerColor "Updating ~/.zshrc..." "magenta" "*"
     cat "$script_dir/zshrc" >"$HOME"/.zshrc
-    bannerColor "We replaced .zshrc with the original contents." "green" "*"
+    bannerColor "We replaced the .zshrc file." "green" "*"
 }
 
 check_starship() {

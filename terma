@@ -5,7 +5,7 @@
 # Awesome Terminal Installer
 #########
 
-version="0.2.5"
+version="0.2.6"
 script_name=$(basename "$0")
 
 myrealpath() {
@@ -101,10 +101,10 @@ install() {
     fi
     check_brew
     # check_sed
-    check_iterm
     check_zsh
     check_omz
     update_zshrc_new
+    check_iterm
     check_starship
     # Snazzy color preset is in the com.googlecode.iterms2.plist
     check_firacode
