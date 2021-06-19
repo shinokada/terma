@@ -103,6 +103,7 @@ install() {
     # check_sed
     check_zsh
     check_omz
+    # second stage
     update_zshrc_new
     check_iterm
     check_starship
@@ -137,23 +138,23 @@ uninstall() {
     if [[ $ans = "Y" ]]; then
         # uninstall autojump
         bannerColor "Uninstalling autojump..." "yellow" "*"
-        "$(brew --prefix)"/bin/brew uninstall autojump
+        $(brew --prefix)/bin/brew uninstall autojump
         bannerColor "Completed uninstalling autojump." "green" "*"
 
         bannerColor "Uninstalling font-fira-code..." "yellow" "*"
-        "$(brew --prefix)"/bin/brew uninstall --cask font-fira-code
+        $(brew --prefix)/bin/brew uninstall --cask font-fira-code
         bannerColor "Completed uninstalling font-fira-code." "green" "*"
 
         bannerColor "Uninstalling Starship..." "yellow" "*"
-        "$(brew --prefix)"/bin/brew uninstall starship
+        $(brew --prefix)/bin/brew uninstall starship
         bannerColor "Completed uninstalling Starship." "green" "*"
 
         bannerColor "Uninstalling Oh My Zsh..." "yellow" "*"
-        sh "$HOME"/.oh-my-zsh/tools/unintall.sh
+        sh "$HOME/.oh-my-zsh/tools/unintall.sh"
         bannerColor "Completed uninstalling Oh-My-Zsh." "green" "*"
 
         bannerColor "Uninstalling iTerm2" "yellow" "*"
-        "$(brew --prefix)"/bin/brew uninstall iterm2
+        $(brew --prefix)/bin/brew uninstall iterm2
         bannerColor "Completed uninstalling iTerm2." "green" "*"
 
         bannerColor "Uninstalling Homebrew..." "yellow" "*"
@@ -161,7 +162,7 @@ uninstall() {
         bannerColor "Completed uninstalling Homebrew." "green" "*"
 
         bannerColor "Removing ~/.oh-my-zsh" "yellow" "*"
-        rm -rf "$HOME"/.oh-my-zsh
+        rm -rf "$HOME/.oh-my-zsh"
         bannerColor "Completed removing ~/.oh-my-zsh directory." "green" "*"
 
         # shellcheck disable=SC2016

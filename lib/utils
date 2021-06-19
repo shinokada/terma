@@ -34,13 +34,11 @@ check_brew() {
 }
 
 check_iterm() {
-    # shellcheck disable=SC1091
-    source "$HOME/.zshrc"
     if "$(brew --prefix)"/bin/brew list --cask iterm2 >&/dev/null; then
         bannerColor "Your system has iTerm2 installed." "green" "*"
     else
         bannerColor "Installing iTerm2 ..." "magenta" "*"
-        if "$(brew --prefix)"/bin/brew install --cask iterm2; then
+        if $(brew --prefix)/bin/brew install --cask iterm2; then
             bannerColor "iTerm2 installation completed." "green" "*"
         else
             bannerColor "iTerm2 installation unsuccessfule." "red" "*"
@@ -53,7 +51,7 @@ check_zsh() {
         bannerColor "Your system has zsh installed." "green" "*"
     else
         bannerColor "Installing zsh ..." "magenta" "*"
-        if "$(brew --prefix)"/bin/brew install zsh; then
+        if $(brew --prefix)/bin/brew install zsh; then
             bannerColor "Zsh installation completed." "green" "*"
         else
             bannerColor "Zsh installation unsuccessful." "red" "*"
@@ -72,10 +70,11 @@ check_omz() {
 }
 
 update_zshrc_new() {
+    omz update
     bannerColor "Updating ~/.zshrc..." "magenta" "*"
-    cat "$script_dir/zshrc1" >"$HOME"/.zshrc
+    cat "$script_dir/zshrc1" >"$HOME/.zshrc"
     echo "Sourcing zshrc..."
-    source $HOME/.zshrc
+    source "$HOME/.zshrc" >&/dev/null
     bannerColor "We replaced the .zshrc file." "green" "*"
 }
 
@@ -84,7 +83,7 @@ check_starship() {
         bannerColor "Your system has Starship installed." "green" "*"
     else
         bannerColor "Installing Starship ..." "magenta" "*"
-        if "$(brew --prefix)"/bin/brew install starship; then
+        if $(brew --prefix)/bin/brew install starship; then
             # shellcheck disable=SC2016
             # echo 'eval "$(starship init zsh)"' >>~/.zshrc
             bannerColor "Starship installation completed." "green" "*"
@@ -92,16 +91,16 @@ check_starship() {
             bannerColor "Starship installation unsuccessful." "red" "*"
         fi
     fi
-    cat "$script_dir/zshrc1" >"$HOME"/.zshrc
-    source $HOME/.zshrc
+    cat "$script_dir/zshrc1" >"$HOME/.zshrc"
+    source "$HOME/.zshrc" >&/dev/null
 }
 
 check_firacode() {
-    if "$(brew --prefix)"/bin/brew list --cask font-fira-code >&/dev/null; then
+    if $(brew --prefix)/bin/brew list --cask font-fira-code >&/dev/null; then
         bannerColor "Your system has Fira Code installed." "green" "*"
     else
         bannerColor "Installing Fira Code font..." "magenta" "*"
-        "$(brew --prefix)"/bin/brew tap homebrew/cask-fonts && "$(brew --prefix)"/bin/brew install --cask font-fira-code
+        $(brew --prefix)/bin/brew tap homebrew/cask-fonts && $(brew --prefix)/bin/brew install --cask font-fira-code
         bannerColor "Fira Code font installation completed." "green" "*"
     fi
 }
@@ -109,9 +108,9 @@ check_firacode() {
 add_plugins() {
     bannerColor "Adding plugins" "green" "*"
     # autojump
-    if ! "$(brew --prefix)"/bin/brew list autojump >&/dev/null; then
+    if ! $(brew --prefix)/bin/brew list autojump >&/dev/null; then
         bannerColor "Installing autojump..." "magenta" "*"
-        "$(brew --prefix)"/bin/brew install autojump
+        $(brew --prefix)/bin/brew install autojump
         # shellcheck disable=SC2016
         # echo '[ -f $(brew --prefix)/etc/profile.d/autojump.sh ] && . $(brew --prefix)/etc/profile.d/autojump.sh' >>"$HOME"/.zshrc
         bannerColor "Autojump installation completed." "green" "*"
@@ -127,9 +126,9 @@ add_plugins() {
     /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
 
     # run source $HOME/.zshrc
-    cat "$script_dir/zshrc" >"$HOME"/.zshrc
+    cat "$script_dir/zshrc" >"$HOME/.zshrc"
     # shellcheck disable=SC1091
-    source "$HOME/.zshrc"
+    source "$HOME/.zshrc" >&/dev/null
     bannerColor "zsh-autosuggestions installation completed." "green" "*"
 }
 
