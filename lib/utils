@@ -92,6 +92,8 @@ check_starship() {
             bannerColor "Starship installation unsuccessful." "red" "*"
         fi
     fi
+    cat "$script_dir/zshrc1" >"$HOME"/.zshrc
+    source $HOME/.zshrc
 }
 
 check_firacode() {
