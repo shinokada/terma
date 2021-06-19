@@ -150,7 +150,7 @@ uninstall() {
 
         bannerColor "Uninstalling Oh My Zsh..." "yellow" "*"
         sh "$HOME"/.oh-my-zsh/tools/unintall.sh
-        bannerColor "Completed uninstalling ." "green" "*"
+        bannerColor "Completed uninstalling Oh-My-Zsh." "green" "*"
 
         bannerColor "Uninstalling iTerm2" "yellow" "*"
         "$(brew --prefix)"/bin/brew uninstall iterm2
