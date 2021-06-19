@@ -172,8 +172,8 @@ uninstall() {
 
         if check_arm64; then
             echo "Removing ~/.zprofile"
-            rm "$HOME"/.zprofile
-            echo "Completed removing ~/.zprofile." "green" "*"
+            rm "$HOME/.zprofile"
+            echo "Completed removing ~/.zprofile."
         fi
 
         bannerColor "Uninstallation completed." "green" "*"
