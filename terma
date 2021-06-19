@@ -95,6 +95,10 @@ copy_plist() {
 
 install() {
     bannerColor "Installation starting..." "magenta" "*"
+    if check_arm64; then
+        # shellcheck disable=SC2016
+        echo 'eval $(/opt/homebrew/bin/brew shellenv)' >>"$HOME"/.zprofile
+    fi
     check_brew
     # check_sed
     check_iterm
@@ -163,6 +167,12 @@ uninstall() {
         # shellcheck disable=SC2016
         cat "$script_dir/zshrc_original" >"$HOME"/.zshrc
         bannerColor "We replaced .zshrc with the original contents." "green" "*"
+
+        if check_arm64; then
+            bannerColor "Removing ~/.zprofile" "yellow" "*"
+            rm "$HOME"/.zprofile
+            bannerColor "Completed removing ~/.zprofile." "green" "*"
+        fi
 
         bannerColor "Uninstallation completed." "green" "*"
     else

@@ -6,6 +6,14 @@ check_cmd() {
     fi
 }
 
+check_arm64() {
+    if [[ $(uname -m) == 'arm64' ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 check_brew() {
     if command -v brew >&/dev/null; then
         bannerColor "Your system has Homebrew installed." "green" "*"
