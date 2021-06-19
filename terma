@@ -171,7 +171,7 @@ uninstall() {
         # shellcheck disable=SC2016
         cat "$script_dir/zshrc_original" >"$HOME"/.zshrc
         bannerColor "We replaced .zshrc with the original contents." "green" "*"
-        /bin/zsh "$(source $HOME/.zshrc)"
+        # /bin/zsh "$(source $HOME/.zshrc)"
 
         if check_arm64; then
             echo "Removing ~/.zprofile"
