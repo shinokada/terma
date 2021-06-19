@@ -74,12 +74,13 @@ check_omz() {
 update_zshrc_new() {
     bannerColor "Updating ~/.zshrc..." "magenta" "*"
     cat "$script_dir/zshrc1" >"$HOME"/.zshrc
+    echo "Sourcing zshrc..."
     source $HOME/.zshrc
     bannerColor "We replaced the .zshrc file." "green" "*"
 }
 
 check_starship() {
-    if command -v starship; then
+    if command -v starship >&/dev/null; then
         bannerColor "Your system has Starship installed." "green" "*"
     else
         bannerColor "Installing Starship ..." "magenta" "*"
