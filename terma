@@ -169,9 +169,9 @@ uninstall() {
         bannerColor "We replaced .zshrc with the original contents." "green" "*"
 
         if check_arm64; then
-            bannerColor "Removing ~/.zprofile" "yellow" "*"
+            echo "Removing ~/.zprofile"
             rm "$HOME"/.zprofile
-            bannerColor "Completed removing ~/.zprofile." "green" "*"
+            echo "Completed removing ~/.zprofile." "green" "*"
         fi
 
         bannerColor "Uninstallation completed." "green" "*"

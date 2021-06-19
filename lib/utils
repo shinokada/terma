@@ -19,10 +19,12 @@ check_brew() {
         bannerColor "Your system has Homebrew installed." "green" "*"
     else
         bannerColor "Installing Homewbrew ..." "magenta" "*"
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         # append to ~/.zshrc
         # shellcheck disable=SC2016
         echo 'export PATH=$(brew --prefix)/bin:$PATH >> $HOME/.zshrc'
+
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
         # source the ~/.zshrc file
         # shellcheck disable=SC1091
         source "$HOME/.zshrc"
@@ -32,11 +34,13 @@ check_brew() {
 }
 
 check_iterm() {
-    if brew list --cask iterm2 >&/dev/null; then
+    # shellcheck disable=SC1091
+    source "$HOME/.zshrc"
+    if "$(brew --prefix)"/bin/brew list --cask iterm2 >&/dev/null; then
         bannerColor "Your system has iTerm2 installed." "green" "*"
     else
         bannerColor "Installing iTerm2 ..." "magenta" "*"
-        if brew install --cask iterm2; then
+        if "$(brew --prefix)"/bin/brew install --cask iterm2; then
             bannerColor "iTerm2 installation completed." "green" "*"
         else
             bannerColor "iTerm2 installation unsuccessfule." "red" "*"
@@ -49,7 +53,7 @@ check_zsh() {
         bannerColor "Your system has zsh installed." "green" "*"
     else
         bannerColor "Installing zsh ..." "magenta" "*"
-        if brew install zsh; then
+        if "$(brew --prefix)"/bin/brew install zsh; then
             bannerColor "Zsh installation completed." "green" "*"
         else
             bannerColor "Zsh installation unsuccessful." "red" "*"
@@ -78,7 +82,7 @@ check_starship() {
         bannerColor "Your system has Starship installed." "green" "*"
     else
         bannerColor "Installing Starship ..." "magenta" "*"
-        if brew install starship; then
+        if "$(brew --prefix)"/bin/brew install starship; then
             # shellcheck disable=SC2016
             # echo 'eval "$(starship init zsh)"' >>~/.zshrc
             bannerColor "Starship installation completed." "green" "*"
@@ -89,11 +93,11 @@ check_starship() {
 }
 
 check_firacode() {
-    if brew list --cask font-fira-code >&/dev/null; then
+    if "$(brew --prefix)"/bin/brew list --cask font-fira-code >&/dev/null; then
         bannerColor "Your system has Fira Code installed." "green" "*"
     else
         bannerColor "Installing Fira Code font..." "magenta" "*"
-        brew tap homebrew/cask-fonts && brew install --cask font-fira-code
+        "$(brew --prefix)"/bin/brew tap homebrew/cask-fonts && "$(brew --prefix)"/bin/brew install --cask font-fira-code
         bannerColor "Fira Code font installation completed." "green" "*"
     fi
 }
@@ -101,7 +105,7 @@ check_firacode() {
 add_plugins() {
     bannerColor "Adding plugins" "green" "*"
     # autojump
-    if ! brew list autojump >&/dev/null; then
+    if ! "$(brew --prefix)"/bin/brew list autojump >&/dev/null; then
         bannerColor "Installing autojump..." "magenta" "*"
         "$(brew --prefix)"/bin/brew install autojump
         # shellcheck disable=SC2016
@@ -114,6 +118,8 @@ add_plugins() {
     bannerColor "zsh-syntax-highlighting installation completed." "green" "*"
 
     bannerColor "Installing zsh-autosuggestions..." "magenta" "*"
+    # make it sure it runs with zsh
+    chsh -s "$(which zsh)"
     # zsh-autosuggestions
     /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
     # replace plugins to plugins=(git brew zsh-syntax-highlighting zsh-autosuggestions)
