@@ -8,9 +8,10 @@ check_cmd() {
 
 check_arm64() {
     if [[ $(uname -m) == 'arm64' ]]; then
-        return 0
-    else
+        # 1 is true
         return 1
+    else
+        return 0
     fi
 }
 
