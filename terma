@@ -160,8 +160,8 @@ uninstall() {
 
         bannerColor "Uninstalling Homebrew..." "yellow" "*"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-        bannerColor "Removing /opt/homebrew dir..." "yellow" "*"
-        rm -rf $(brew --prefix)
+        # bannerColor "Removing /opt/homebrew dir..." "yellow" "*"
+        # rm -rf $(brew --prefix)
         bannerColor "Completed uninstalling Homebrew." "green" "*"
 
         bannerColor "Removing ~/.oh-my-zsh" "yellow" "*"
@@ -171,7 +171,7 @@ uninstall() {
         # shellcheck disable=SC2016
         cat "$script_dir/zshrc_original" >"$HOME"/.zshrc
         bannerColor "We replaced .zshrc with the original contents." "green" "*"
-        exec /bin/zsh source $HOME/.zshrc
+        /bin/zsh $(source $HOME/.zshrc)
 
         if check_arm64; then
             echo "Removing ~/.zprofile"
