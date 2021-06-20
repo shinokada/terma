@@ -136,10 +136,10 @@ EOF
 
 uninstall() {
     # confirm
-    read -rp "Do you want to uninstall? yes/y or no/n   " PANS
+    read "PANS?Do you want to uninstall? Y/y or N/n   ?"
 
-    ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
-    if [[ $ans = "Y" ]]; then
+    # ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
+    if [[ $PANS =~ ^[Yy]$ ]]; then
         # uninstall autojump
         bannerColor "Uninstalling autojump..." "yellow" "*"
 
