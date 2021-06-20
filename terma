@@ -5,7 +5,7 @@
 # Awesome Terminal Installer
 #########
 
-version="0.3.3"
+version="0.3.4"
 script_name=$(basename "$0")
 
 myrealpath() {
@@ -95,25 +95,32 @@ copy_plist() {
 
 install() {
     bannerColor "Installation starting..." "magenta" "*"
-    if check_arm64; then
+    if [ $(uname -m) = 'arm64' ]; then
         # shellcheck disable=SC2016
         echo 'eval $(/opt/homebrew/bin/brew shellenv)' >>"$HOME"/.zprofile
+    else
+        echo "It's not"
     fi
+    echo "Updating ~/.zshrc."
     source_zshrc
     check_brew
+    echo "Updating ~/.zshrc."
     source_zshrc
     # check_sed
     check_zsh
     check_omz
     # second stage
+    echo "Updating ~/.zshrc."
     update_zshrc_new
     check_iterm
     check_starship
+    echo "Updating ~/.zshrc."
     source_zshrc
     # Snazzy color preset is in the com.googlecode.iterms2.plist
     check_firacode
     copy_plist
     add_plugins
+    echo "Updating ~/.zshrc."
     source_zshrc
     tput setaf 2
     cat <<'EOF'
@@ -136,7 +143,7 @@ EOF
 
 uninstall() {
     # confirm
-    read "PANS?Do you want to uninstall? Y/y or N/n   ?"
+    read "PANS?Do you want to uninstall Y/y or N/n?   "
 
     # ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
     if [[ $PANS =~ ^[Yy]$ ]]; then
@@ -177,7 +184,7 @@ uninstall() {
         bannerColor "We replaced .zshrc with the original contents." "green" "*"
         source $HOME/.zshrc
 
-        if check_arm64; then
+        if [ $(uname -m) = 'arm64' ]; then
             echo "Removing ~/.zprofile"
             rm "$HOME/.zprofile"
             echo "Completed removing ~/.zprofile."
