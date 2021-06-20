@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 check_cmd() {
     if [[ -z "$(command -v "$1")" ]]; then
@@ -15,6 +15,12 @@ check_arm64() {
     fi
 }
 
+source_zshrc() {
+    if [[ -f $HOME/.zshrc ]]; then
+        source "$HOME/.zshrc"
+    fi
+}
+
 check_brew() {
     if command -v brew >&/dev/null; then
         bannerColor "Your system has Homebrew installed." "green" "*"
@@ -24,11 +30,11 @@ check_brew() {
         # shellcheck disable=SC2016
         echo 'export PATH=$(brew --prefix)/bin:$PATH >> $HOME/.zshrc' >&/dev/null
 
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" || exit
 
         # source the ~/.zshrc file
-        # shellcheck disable=SC1091
-        # /bin/zsh "$(source $HOME/.zshrc)"
+        # # shellcheck disable=SC1091
+        # source $HOME/.zshrc
         bannerColor "Homebrew installation completed." "green" "*"
     fi
     return 0
@@ -42,7 +48,7 @@ check_iterm() {
         if $(brew --prefix)/bin/brew install --cask iterm2; then
             bannerColor "iTerm2 installation completed." "green" "*"
         else
-            bannerColor "iTerm2 installation unsuccessfule." "red" "*"
+            bannerColor "iTerm2 installation unsuccessfule." "red" "*" || exit 1
         fi
     fi
 }
@@ -55,7 +61,7 @@ check_zsh() {
         if $(brew --prefix)/bin/brew install zsh; then
             bannerColor "Zsh installation completed." "green" "*"
         else
-            bannerColor "Zsh installation unsuccessful." "red" "*"
+            bannerColor "Zsh installation unsuccessful." "red" "*" || exit 1
         fi
     fi
 }
@@ -66,16 +72,15 @@ check_omz() {
     else
         bannerColor "Installing Oh My Zsh ..." "magenta" "*"
         bannerColor "Installation will end after this, please run terma again." "red" "*"
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" || exit 1
     fi
 }
 
 update_zshrc_new() {
-    /bin/zsh "$(omz update)"
     bannerColor "Updating ~/.zshrc..." "magenta" "*"
-    cat "$script_dir/zshrc1" >"$HOME/.zshrc"
+    cat "$script_dir/zshrc1" >"$HOME/.zshrc" || exit 1
     # echo "Sourcing zshrc..."
-    # /bin/zsh "$(source $HOME/.zshrc)"
+    source $HOME/.zshrc
     bannerColor "We replaced the .zshrc file." "green" "*"
 }
 
@@ -89,11 +94,10 @@ check_starship() {
             # echo 'eval "$(starship init zsh)"' >>~/.zshrc
             bannerColor "Starship installation completed." "green" "*"
         else
-            bannerColor "Starship installation unsuccessful." "red" "*"
+            bannerColor "Starship installation unsuccessful." "red" "*" || exit 1
         fi
     fi
     cat "$script_dir/zshrc1" >"$HOME/.zshrc"
-    # /bin/zsh "$(source $HOME/.zshrc)"
 }
 
 check_firacode() {
@@ -101,7 +105,7 @@ check_firacode() {
         bannerColor "Your system has Fira Code installed." "green" "*"
     else
         bannerColor "Installing Fira Code font..." "magenta" "*"
-        $(brew --prefix)/bin/brew tap homebrew/cask-fonts && $(brew --prefix)/bin/brew install --cask font-fira-code
+        $(brew --prefix)/bin/brew tap homebrew/cask-fonts && $(brew --prefix)/bin/brew install --cask font-fira-code || exit 1
         bannerColor "Fira Code font installation completed." "green" "*"
     fi
 }
@@ -111,25 +115,25 @@ add_plugins() {
     # autojump
     if ! $(brew --prefix)/bin/brew list autojump >&/dev/null; then
         bannerColor "Installing autojump..." "magenta" "*"
-        $(brew --prefix)/bin/brew install autojump
+        $(brew --prefix)/bin/brew install autojump || exit 1
         # shellcheck disable=SC2016
         # echo '[ -f $(brew --prefix)/etc/profile.d/autojump.sh ] && . $(brew --prefix)/etc/profile.d/autojump.sh' >>"$HOME"/.zshrc
         bannerColor "Autojump installation completed." "green" "*"
     fi
 
     bannerColor "Installing zsh-syntax-highlighting..." "magenta" "*"
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH/custom/plugins/zsh-syntax-highlighting
+    /usr/bin/git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH/custom/plugins/zsh-syntax-highlighting || exit 1
     bannerColor "zsh-syntax-highlighting installation completed." "green" "*"
 
     bannerColor "Installing zsh-autosuggestions..." "magenta" "*"
 
     # zsh-autosuggestions
-    /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions
+    /usr/bin/git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH/custom/plugins/zsh-autosuggestions || exit 1
 
     # create $HOME/.zshrc
     cat "$script_dir/zshrc" >"$HOME/.zshrc"
     # shellcheck disable=SC1091
-    # /bin/zsh "$(source $HOME/.zshrc)"
+    # source $HOME/.zshrc
     bannerColor "zsh-autosuggestions installation completed." "green" "*"
 }
 

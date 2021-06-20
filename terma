@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 #########
 # Author : Shinichi Okada
 # Awesome Terminal Installer
 #########
 
-version="0.3.2"
+version="0.3.3"
 script_name=$(basename "$0")
 
 myrealpath() {
@@ -99,7 +99,9 @@ install() {
         # shellcheck disable=SC2016
         echo 'eval $(/opt/homebrew/bin/brew shellenv)' >>"$HOME"/.zprofile
     fi
+    source_zshrc
     check_brew
+    source_zshrc
     # check_sed
     check_zsh
     check_omz
@@ -107,10 +109,12 @@ install() {
     update_zshrc_new
     check_iterm
     check_starship
+    source_zshrc
     # Snazzy color preset is in the com.googlecode.iterms2.plist
     check_firacode
     copy_plist
     add_plugins
+    source_zshrc
     tput setaf 2
     cat <<'EOF'
 
@@ -171,7 +175,7 @@ uninstall() {
         # shellcheck disable=SC2016
         cat "$script_dir/zshrc_original" >"$HOME"/.zshrc
         bannerColor "We replaced .zshrc with the original contents." "green" "*"
-        # /bin/zsh "$(source $HOME/.zshrc)"
+        source $HOME/.zshrc
 
         if check_arm64; then
             echo "Removing ~/.zprofile"
