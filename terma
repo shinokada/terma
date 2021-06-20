@@ -2,10 +2,10 @@
 
 #########
 # Author : Shinichi Okada
-# Awesome Terminal Installer
+# Terminal Makeover Automated
 #########
 
-version="0.3.4"
+version="0.3.5"
 script_name=$(basename "$0")
 
 myrealpath() {
@@ -191,6 +191,7 @@ uninstall() {
         fi
 
         bannerColor "Uninstallation completed." "green" "*"
+        bannerColor "Please close this tab, open a new tab or rstart the terminal." "green" "*"
     else
         exit
     fi
