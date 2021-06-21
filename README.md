@@ -18,10 +18,7 @@ This script installs followings, if it is not installed on you system:
 - iTerm2 preferences plist
 - Plugins: [autojump](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/autojump), [brew](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/brew), [git](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git), [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md), and [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions).
 
-
 ## Requirement
-
-
 
 ## Installation
 
@@ -31,9 +28,8 @@ This script installs followings, if it is not installed on you system:
 terma
 ```
 
-1. at the beginning it requires your passwor and press return.
-2. After Oh-my-zsh, run `terma` again.
-3. Run `omz update` after installation.
+- at the beginning it requires your passwor and press return.
+- After Oh-my-zsh, run `terma` again.
 
 ## Usage
 
@@ -63,8 +59,7 @@ The original `com.googlecode.iterm2.plist` is in the `$HOME/Library/Preferences/
 terma uninstall
 ```
 
-Homebrew uninstallation will confirm if you want to uninstalland your password.
-
+Homebrew uninstallation requires your password.
 
 ## Author
 
