@@ -1,4 +1,6 @@
-# Awesome Terminal Installer
+# Terminal Makeover Automated
+
+![Terma](https://raw.githubusercontent.com/shinokada/terma/main/images/terma12-a.gif)
 
 ## Overview
 
