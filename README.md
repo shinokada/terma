@@ -1,4 +1,4 @@
-# Terminal Makeover Automated
+<h1  align="center">Terminal Makeover Automated</h1>
 <p align="center">
 <img width="400" src="https://raw.githubusercontent.com/shinokada/terma/main/images/terma12-a.gif" />
 
@@ -6,6 +6,7 @@
 <p align="center">
 Photo by Haseeb Jamil on Unsplash. Gif by Author.
 </p>
+
 ## Overview
 
 This script automates installing a terminal setup described in [this article](https://towardsdatascience.com/the-ultimate-guide-to-your-terminal-makeover-e11f9b87ac99).
