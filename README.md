@@ -1,9 +1,9 @@
 <p align="center">
 <img width="400" src="https://raw.githubusercontent.com/shinokada/terma/main/images/terma12-a.gif" />
-<h1  align="center">Terminal Makeover Automated</h1>
-</p>
 <p align="center">
 Photo by Haseeb Jamil on Unsplash. Gif by Author.
+</p>
+<h1  align="center">Terminal Makeover Automated</h1>
 </p>
 
 ## Overview
@@ -24,27 +24,26 @@ This script installs followings, if it is not installed on you system:
 - iTerm2 preferences plist
 - Plugins: [autojump](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/autojump), [brew](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/brew), [git](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git), [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md), and [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions).
 
-## Requirement
-
 ## Installation
 
 [Awesome package installer](https://github.com/shinokada/awesome)
+
+```sh
+awesome -i shinokada/terma
+```
+
+## Getting started
 
 ```sh
 terma
 ```
 
 - at the beginning it requires your passwor and press return.
-- After Oh-my-zsh, run `terma` again.
-
-## Usage
+- After Oh My Zsh installation, it will exit. Please run `terma` again.
 
 Run all the command from a terminal (not iTerm).
 
 ```sh
-# Install
-terma
-
 # show help
 terma -h
 
@@ -52,12 +51,7 @@ terma -h
 terma -v
 ```
 
-After Oh My Zsh installation, it will exit.
-Please run `terma` again.
-
-This add `com.googlecode.iterm2.plist` to `$HOME/Library/Preferences/`
-
-The original `com.googlecode.iterm2.plist` is in the `$HOME/Library/Preferences/` directory.
+This script adds `com.googlecode.iterm2.plist` to `$HOME/Library/Preferences/`
 
 ### How to uninstall Awesome Terminal
 
