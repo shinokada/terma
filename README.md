@@ -1,10 +1,10 @@
 <p align="center">
 <img width="400" src="https://raw.githubusercontent.com/shinokada/terma/main/images/terma12-a.gif" />
+</p>
 <p align="center">
 Photo by <a href="https://unsplash.com/@haseebjkhan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Haseeb Jamil</a> on <a href="https://unsplash.com/">Unsplash</a>. Gif by Author.
 </p>
 <h1  align="center">Terminal Makeover Automated</h1>
-</p>
 
 ## Overview
 
