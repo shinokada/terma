@@ -51,7 +51,7 @@ fn_script_dir() {
     if [[ -L $which_install ]]; then
         # -L file exists and is a symbolic link.
         # check if installation is Homebrew
-        # if so use script_dir=/opt/homebrew/Cellar/$0/${version}/bin
+        # if so use script_dir=$(brew --prefix)/Cellar/$0/${version}/bin
         if [[ "$which_install" == *"homebrew"* ]]; then
             script_dir="$(brew --prefix)/Cellar/$0/${version}/bin"
         else
@@ -97,7 +97,7 @@ install() {
     bannerColor "Installation starting..." "magenta" "*"
     if [ $(uname -m) = 'arm64' ]; then
         # shellcheck disable=SC2016
-        echo 'eval $(/opt/homebrew/bin/brew shellenv)' >>"$HOME"/.zprofile
+        echo 'eval $($(brew --prefix)/bin/brew shellenv)' >>"$HOME"/.zprofile
     fi
     echo "Updating ~/.zshrc."
     source_zshrc
@@ -169,7 +169,7 @@ uninstall() {
 
         bannerColor "Uninstalling Homebrew..." "yellow" "*"
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-        # bannerColor "Removing /opt/homebrew dir..." "yellow" "*"
+        # bannerColor "Removing $(brew --prefix) dir..." "yellow" "*"
         # rm -rf $(brew --prefix)
         bannerColor "Completed uninstalling Homebrew." "green" "*"
 
