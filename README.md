@@ -1,6 +1,9 @@
 # Terminal Makeover Automated
 <p align="center">
 <img width="400" src="https://raw.githubusercontent.com/shinokada/terma/main/images/terma12-a.gif" />
+
+</p>
+<p align="center">
 Photo by Haseeb Jamil on Unsplash. Gif by Author.
 </p>
 ## Overview
