@@ -1,7 +1,7 @@
 <p align="center">
 <img width="400" src="https://raw.githubusercontent.com/shinokada/terma/main/images/terma12-a.gif" />
 <p align="center">
-Photo by Haseeb Jamil on Unsplash. Gif by Author.
+Photo by [Haseeb Jamil](https://unsplash.com/@haseebjkhan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/). Gif by Author.
 </p>
 <h1  align="center">Terminal Makeover Automated</h1>
 </p>
