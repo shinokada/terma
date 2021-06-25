@@ -100,14 +100,6 @@ install() {
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >"$HOME/.zprofile"
     fi
 
-    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        # Linux
-        # echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >"/root/.zprofile"
-        test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
-        test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-        test -r ~/.bash_profile && echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.bash_profile
-        echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
-    fi
     echo "Updating ~/.zshrc."
     source_zshrc
     check_brew
@@ -195,13 +187,6 @@ uninstall() {
             echo "Removing ~/.zprofile"
             rm "$HOME/.zprofile"
             echo "Completed removing ~/.zprofile."
-        fi
-
-        if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-            # Linux
-            echo "Removing /root/.zprofile"
-            rm "/root/.zprofile"
-            echo "Completed removing /root/.zprofile."
         fi
 
         bannerColor "Uninstallation completed." "green" "*"
