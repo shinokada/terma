@@ -164,7 +164,7 @@ uninstall() {
         bannerColor "Completed uninstalling Oh-My-Zsh." "green" "*"
 
         bannerColor "Uninstalling iTerm2" "yellow" "*"
-        $(brew --prefix)/bin/brew uninstall iterm2
+        $(brew --prefix)/bin/brew uninstall --cask iterm2
         bannerColor "Completed uninstalling iTerm2." "green" "*"
 
         bannerColor "Uninstalling Homebrew..." "yellow" "*"
