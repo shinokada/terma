@@ -67,15 +67,6 @@ fn_script_dir() {
 script_dir=$(fn_script_dir)
 # echo "$script_dir"
 
-fn_confirm() {
-    local package=$1
-    read -rp "Do you want to uninstall $package? yes/y or no/n   " PANS
-
-    ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
-
-    echo "$ans"
-}
-
 import() {
     local file="${script_dir}/lib/${1}"
     if [ -f "${file}" ]; then
@@ -150,12 +141,10 @@ EOF
 
 uninstall() {
     # confirm
-    # read "PANS?Are you sure to uninstall Y/y or N/n?   "
-    if [[ $(fn_confirm all) = "Y" ]]; then
+    printf '%s' 'Do you want to uninstall Homebrew? (y/n) '
+    read ANS
 
-        # fi
-        # ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
-        # if [[ $PANS =~ ^[Yy]$ ]]; then
+    if [[ $ANS =~ ^[Yy]$ ]]; then
         # uninstall autojump
         bannerColor "Uninstalling autojump..." "yellow" "*"
 
@@ -174,21 +163,15 @@ uninstall() {
         sh "$HOME/.oh-my-zsh/tools/unintall.sh" >&/dev/null
         bannerColor "Completed uninstalling Oh-My-Zsh." "green" "*"
 
-        # confirm
-        if [[ $(fn_confirm all) = "Y" ]]; then
-            bannerColor "Uninstalling iTerm2" "yellow" "*"
-            $(brew --prefix)/bin/brew uninstall iterm2
-            bannerColor "Completed uninstalling iTerm2." "green" "*"
-        fi
+        bannerColor "Uninstalling iTerm2" "yellow" "*"
+        $(brew --prefix)/bin/brew uninstall iterm2
+        bannerColor "Completed uninstalling iTerm2." "green" "*"
 
-        # confirm
-        if [[ $(fn_confirm all) = "Y" ]]; then
-            bannerColor "Uninstalling Homebrew..." "yellow" "*"
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-            # bannerColor "Removing $(brew --prefix) dir..." "yellow" "*"
-            # rm -rf $(brew --prefix)
-            bannerColor "Completed uninstalling Homebrew." "green" "*"
-        fi
+        bannerColor "Uninstalling Homebrew..." "yellow" "*"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+        # bannerColor "Removing $(brew --prefix) dir..." "yellow" "*"
+        # rm -rf $(brew --prefix)
+        bannerColor "Completed uninstalling Homebrew." "green" "*"
 
         bannerColor "Removing ~/.oh-my-zsh" "yellow" "*"
         rm -rf "$HOME/.oh-my-zsh"
