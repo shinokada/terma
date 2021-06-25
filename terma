@@ -5,7 +5,7 @@
 # Terminal Makeover Automated
 #########
 
-version="0.3.5"
+version="0.3.6"
 script_name=$(basename "$0")
 
 myrealpath() {
@@ -98,6 +98,11 @@ install() {
     if [ $(uname -m) = 'arm64' ]; then
         # shellcheck disable=SC2016
         echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >"$HOME/.zprofile"
+    fi
+
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        # Linux
+        echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >"$HOME/.zprofile"
     fi
     echo "Updating ~/.zshrc."
     source_zshrc
