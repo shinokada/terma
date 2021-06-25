@@ -97,7 +97,7 @@ install() {
     bannerColor "Installation starting..." "magenta" "*"
     if [ $(uname -m) = 'arm64' ]; then
         # shellcheck disable=SC2016
-        echo 'eval $($(brew --prefix)/bin/brew shellenv)' >"$HOME"/.zprofile
+        echo 'eval "$($(brew --prefix)/bin/brew shellenv)"' >"$HOME/.zprofile"
     fi
     echo "Updating ~/.zshrc."
     source_zshrc
