@@ -67,6 +67,15 @@ fn_script_dir() {
 script_dir=$(fn_script_dir)
 # echo "$script_dir"
 
+fn_confirm() {
+    local package=$1
+    read -rp "Do you want to uninstall $package? yes/y or no/n   " PANS
+
+    ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
+
+    echo "$ans"
+}
+
 import() {
     local file="${script_dir}/lib/${1}"
     if [ -f "${file}" ]; then
@@ -141,10 +150,12 @@ EOF
 
 uninstall() {
     # confirm
-    read "PANS?Are you sure to uninstall Y/y or N/n?   "
+    # read "PANS?Are you sure to uninstall Y/y or N/n?   "
+    if [[ $(fn_confirm all) = "Y" ]]; then
 
-    # ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
-    if [[ $PANS =~ ^[Yy]$ ]]; then
+        # fi
+        # ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
+        # if [[ $PANS =~ ^[Yy]$ ]]; then
         # uninstall autojump
         bannerColor "Uninstalling autojump..." "yellow" "*"
 
@@ -164,16 +175,14 @@ uninstall() {
         bannerColor "Completed uninstalling Oh-My-Zsh." "green" "*"
 
         # confirm
-        read "TERM?Do you want to uninstall iTerm2, Y/y or N/n?   "
-        if [[ $TERM =~ ^[Yy]$ ]]; then
+        if [[ $(fn_confirm all) = "Y" ]]; then
             bannerColor "Uninstalling iTerm2" "yellow" "*"
             $(brew --prefix)/bin/brew uninstall iterm2
             bannerColor "Completed uninstalling iTerm2." "green" "*"
         fi
 
         # confirm
-        read "HB?Do you want to uninstall Homebrew, Y/y or N/n?   "
-        if [[ $HB =~ ^[Yy]$ ]]; then
+        if [[ $(fn_confirm all) = "Y" ]]; then
             bannerColor "Uninstalling Homebrew..." "yellow" "*"
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
             # bannerColor "Removing $(brew --prefix) dir..." "yellow" "*"
@@ -197,7 +206,7 @@ uninstall() {
         fi
 
         bannerColor "Uninstallation completed." "green" "*"
-        bannerColor "Please close this tab, open a new tab or rstart the terminal." "green" "*"
+        bannerColor "Please close this tab, open a new tab or restart the terminal." "green" "*"
     else
         exit
     fi
