@@ -141,7 +141,7 @@ EOF
 
 uninstall() {
     # confirm
-    read "PANS?Do you want to uninstall Y/y or N/n?   "
+    read "PANS?Are you sure to uninstall Y/y or N/n?   "
 
     # ans=$(echo "$PANS" | cut -c 1-1 | tr "[:lower:]" "[:upper:]")
     if [[ $PANS =~ ^[Yy]$ ]]; then
@@ -163,15 +163,23 @@ uninstall() {
         sh "$HOME/.oh-my-zsh/tools/unintall.sh" >&/dev/null
         bannerColor "Completed uninstalling Oh-My-Zsh." "green" "*"
 
-        bannerColor "Uninstalling iTerm2" "yellow" "*"
-        $(brew --prefix)/bin/brew uninstall iterm2
-        bannerColor "Completed uninstalling iTerm2." "green" "*"
+        # confirm
+        read "TERM?Do you want to uninstall iTerm2, Y/y or N/n?   "
+        if [[ $TERM =~ ^[Yy]$ ]]; then
+            bannerColor "Uninstalling iTerm2" "yellow" "*"
+            $(brew --prefix)/bin/brew uninstall iterm2
+            bannerColor "Completed uninstalling iTerm2." "green" "*"
+        fi
 
-        bannerColor "Uninstalling Homebrew..." "yellow" "*"
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-        # bannerColor "Removing $(brew --prefix) dir..." "yellow" "*"
-        # rm -rf $(brew --prefix)
-        bannerColor "Completed uninstalling Homebrew." "green" "*"
+        # confirm
+        read "HB?Do you want to uninstall Homebrew, Y/y or N/n?   "
+        if [[ $HB =~ ^[Yy]$ ]]; then
+            bannerColor "Uninstalling Homebrew..." "yellow" "*"
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+            # bannerColor "Removing $(brew --prefix) dir..." "yellow" "*"
+            # rm -rf $(brew --prefix)
+            bannerColor "Completed uninstalling Homebrew." "green" "*"
+        fi
 
         bannerColor "Removing ~/.oh-my-zsh" "yellow" "*"
         rm -rf "$HOME/.oh-my-zsh"
