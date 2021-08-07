@@ -10,6 +10,10 @@ Photo by <a href="https://unsplash.com/@haseebjkhan?utm_source=unsplash&utm_medi
 
 This script automates installing a terminal setup described in [this article](https://towardsdatascience.com/the-ultimate-guide-to-your-terminal-makeover-e11f9b87ac99).
 
+## Caution
+
+This script for a new Mac. If you already installed iTerm2 and plugins, I suggest saving the ~/.oh-my-zsh directory, ~/.zshrc file, and ~/Library/Preferences/com.googlecode.iterm2.plist. I recommend using [Automate Brew Installer](https://betterprogramming.pub/how-to-automate-homebrew-installs-on-your-new-mac-or-linux-51e06881c5b7) first to save your brew list and then reinstall it after the Terma installation.
+
 ## Features
 
 This script installs followings, if it is not installed on you system:
@@ -39,7 +43,7 @@ terma
 ```
 
 - at the beginning it requires your passwor and press return.
-- After Oh My Zsh installation, it will exit. Please run `terma` again.
+- After Oh My Zsh installation, it will exit. Please run `terma` **AGAIN**.
 
 Run all the command from a terminal (not iTerm).
 
