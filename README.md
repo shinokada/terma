@@ -33,7 +33,7 @@ This script installs followings, if it is not installed on you system:
 [Awesome package installer](https://github.com/shinokada/awesome)
 
 ```sh
-awesome -i shinokada/terma
+awesome install shinokada/terma
 ```
 
 ## Getting started
