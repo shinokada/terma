@@ -5,7 +5,7 @@
 # Terminal Makeover Automated
 #########
 
-version="0.3.6"
+version="0.4.0"
 script_name=$(basename "$0")
 
 myrealpath() {
@@ -152,9 +152,9 @@ uninstall() {
         $(brew --prefix)/bin/brew uninstall autojump
         bannerColor "Completed uninstalling autojump." "green" "*"
 
-        bannerColor "Uninstalling font-fira-code..." "yellow" "*"
-        $(brew --prefix)/bin/brew uninstall --cask font-fira-code
-        bannerColor "Completed uninstalling font-fira-code." "green" "*"
+        bannerColor "Uninstalling font-fira-code-nerd-font ..." "yellow" "*"
+        $(brew --prefix)/bin/brew uninstall --cask font-fira-code-nerd-font
+        bannerColor "Completed uninstalling font-fira-code-nerd-font." "green" "*"
 
         bannerColor "Uninstalling Starship..." "yellow" "*"
         $(brew --prefix)/bin/brew uninstall starship
