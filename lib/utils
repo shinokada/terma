@@ -100,11 +100,11 @@ check_starship() {
 }
 
 check_firacode() {
-    if $(brew --prefix)/bin/brew list --cask font-fira-code >&/dev/null; then
+    if $(brew --prefix)/bin/brew list --cask font-fira-code-nerd-font >&/dev/null; then
         bannerColor "Your system has Fira Code installed." "green" "*"
     else
-        bannerColor "Installing Fira Code font..." "magenta" "*"
-        $(brew --prefix)/bin/brew tap homebrew/cask-fonts && $(brew --prefix)/bin/brew install --cask font-fira-code || exit 1
+        bannerColor "Installing Fira Code Nerd font..." "magenta" "*"
+        $(brew --prefix)/bin/brew tap homebrew/cask-fonts && $(brew --prefix)/bin/brew install --cask font-fira-code-nerd-font || exit 1
         bannerColor "Fira Code font installation completed." "green" "*"
     fi
 }
